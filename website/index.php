@@ -1,26 +1,1 @@
-<?php // @codingStandardsIgnoreFile
-
-// check PHP platform requirements
-if (PHP_VERSION_ID < 50306) {
-    die('Pico requires PHP 5.3.6 or above to run');
-}
-if (!extension_loaded('dom')) {
-    die('Pico requires the PHP extension "dom" to run');
-}
-if (!extension_loaded('mbstring')) {
-    die('Pico requires the PHP extension "mbstring" to run');
-}
-
-// load dependencies
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// instance Pico
-$pico = new Pico(
-    __DIR__,    // root dir
-    'config/',  // config dir
-    'plugins/', // plugins dir
-    'themes/'   // themes dir
-);
-
-// run application
-echo $pico->run();
+<!DOCTYPE html><html>	<head>		<title>SRTS Home</title>		<link rel="stylesheet" type="text/css" href="CSS/style.css">		<meta name="description" content="Static page to display data for srts system.">		<meta name="viewport" content="width=device-width, initial-scale=1.0">		<meta http-equiv="refresh" content="1" >	</head>	<h1>Welcome To School</h1>	<body>		<div id="largeName">						<?php/*******EDIT LINES 16-20*******/$DB_Server = "localhost"; //MySQL Server    $DB_Username = "root"; //MySQL Username     $DB_Password = "pi";             //MySQL Password     $DB_DBName = "srts";         //MySQL Database Name  $DB_TBLName = "students"; //MySQL Table Name   $filename = "SRTS Database Capture";   $name = "";						//empty name to be returned to the website      //create connection$conn = new mysqli("localhost", $DB_Username, $DB_Password, $DB_DBName);//check connectionif ($conn->connect_error){	die("Connection failed: " . $conn->connect_error);}//variables to get the first row the first time$result = $conn->query("SELECT * FROM `tag`");$rfid = mysqli_fetch_array($result);$lastvalue = $rfid['RFID'];//variables to get the first name from the database	$sql_1 = "SELECT `FirstName`,`RFID` 'scanned' FROM `students` WHERE `RFID` = '$lastvalue'";	$result = $conn->query($sql_1);	$studentrows = mysqli_fetch_array($result);	$name = $studentrows['FirstName'];	$scanned = $studentrows['scanned'];	if($scanned == 0) {		$sql_2 = "UPDATE 'users' SET 'scanned' = 1 WHERE `RFID` = '$lastvalue'";		$result = $conn->query($sql_2);		}		if($name != $namelist1) {		$namelist1 = $temp;		$namelist1 = $name; 		$namelist2 = $namelist1;		$namelist3 = $namelist2;	}	echo "Good Job " . $name . "!";mysqli_close($con);?>		</div>		<div id="SecondRow">			<div id="nameList">	<?php	//$myfile = fopen("list_of_names.txt", "r");	echo $namelist1;	echo $namelist2;	echo $namelist3;	//fclose($myfile);?>			</div>			<div id="logo">				<p>Welcome to Purdue EPICS</p>			</div>		</div>	</body></html>
