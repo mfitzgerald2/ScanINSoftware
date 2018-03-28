@@ -1,0 +1,36 @@
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 12 scans 
+Frequency: 0.8 
+Number of scans at 9  degrees in 15 seconds: 4 scans 
+Frequency: 0.266666666667 
+Number of scans at 8  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 9  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 8 scans 
+Frequency: 0.533333333333 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 9  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 9  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 0  degrees in 15 seconds: 32 scans 
+Frequency: 2.13333333333 
