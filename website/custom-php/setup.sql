@@ -37,3 +37,8 @@ CREATE TABLE lastscanned (
 
 INSERT INTO lastscanned (RFID) VALUES ('e200500045190280141088be');
 
+CREATE TRIGGER update_attendance before insert on lastscanned
+for each row
+insert into attendance (AtRFID, user_id) values (new.RFID, (select user_id from tag where RFID like new.RFID));
+
+
