@@ -1,0 +1,2 @@
+
+[20-Mar-2018 13:42:32 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/srts/public_html/v1/viewdatabase.php on line 62

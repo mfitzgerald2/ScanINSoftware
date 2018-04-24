@@ -1,0 +1,33 @@
+[03-Apr-2018 01:36:31 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to DOMNode::replaceChild() must be an instance of DOMNode, null given in /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php:473
+Stack trace:
+#0 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(473): DOMNode->replaceChild(NULL, Object(DOMElement))
+#1 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(228): ParsedownExtra->processTag('<html lang="en"...')
+#2 /home/srts/public_html/vendor/erusev/parsedown/Parsedown.php(250): ParsedownExtra->blockMarkupComplete(Array)
+#3 /home/srts/public_html/vendor/erusev/parsedown/Parsedown.php(39): Parsedown->lines(Array)
+#4 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(46): Parsedown->text('<?php\n// Includ...')
+#5 /home/srts/public_html/lib/Pico.php(932): ParsedownExtra->text('\n<?php\n// Inclu...')
+#6 /home/srts/public_html/lib/Pico.php(334): Pico->parseFileContent('\n<?php\n// Inclu...')
+#7 /home/srts/public_html/index.php(26): Pico->run()
+#8 {m in /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php on line 473
+[03-Apr-2018 01:36:58 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to DOMNode::replaceChild() must be an instance of DOMNode, null given in /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php:473
+Stack trace:
+#0 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(473): DOMNode->replaceChild(NULL, Object(DOMElement))
+#1 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(228): ParsedownExtra->processTag('<html lang="en"...')
+#2 /home/srts/public_html/vendor/erusev/parsedown/Parsedown.php(250): ParsedownExtra->blockMarkupComplete(Array)
+#3 /home/srts/public_html/vendor/erusev/parsedown/Parsedown.php(39): Parsedown->lines(Array)
+#4 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(46): Parsedown->text('// Include conf...')
+#5 /home/srts/public_html/lib/Pico.php(932): ParsedownExtra->text('\n\n// Include co...')
+#6 /home/srts/public_html/lib/Pico.php(334): Pico->parseFileContent('\n\n// Include co...')
+#7 /home/srts/public_html/index.php(26): Pico->run()
+#8 {ma in /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php on line 473
+[03-Apr-2018 01:39:50 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to DOMNode::replaceChild() must be an instance of DOMNode, null given in /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php:473
+Stack trace:
+#0 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(473): DOMNode->replaceChild(NULL, Object(DOMElement))
+#1 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(228): ParsedownExtra->processTag('<html lang="en"...')
+#2 /home/srts/public_html/vendor/erusev/parsedown/Parsedown.php(250): ParsedownExtra->blockMarkupComplete(Array)
+#3 /home/srts/public_html/vendor/erusev/parsedown/Parsedown.php(39): Parsedown->lines(Array)
+#4 /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php(46): Parsedown->text('// Include conf...')
+#5 /home/srts/public_html/lib/Pico.php(932): ParsedownExtra->text('\n\n// Include co...')
+#6 /home/srts/public_html/lib/Pico.php(334): Pico->parseFileContent('\n\n// Include co...')
+#7 /home/srts/public_html/index.php(26): Pico->run()
+#8 {ma in /home/srts/public_html/vendor/erusev/parsedown-extra/ParsedownExtra.php on line 473

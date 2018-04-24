@@ -1,0 +1,6 @@
+Number of scans at 3  degrees in 15 seconds: 1 scans 
+Frequency: 0.0666666666667 
+Number of scans at 3  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 
+Number of scans at 3  degrees in 15 seconds: 0 scans 
+Frequency: 0.0 

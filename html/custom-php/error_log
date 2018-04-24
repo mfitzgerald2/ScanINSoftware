@@ -1,0 +1,78 @@
+
+[26-Mar-2018 19:47:02 UTC] PHP Parse error:  syntax error, unexpected 'Username' (T_STRING), expecting ',' or ';' in /home/srts/public_html/v15/old/viewdb.php on line 17
+[26-Mar-2018 19:59:29 UTC] PHP Warning:  require_once(/config.php): failed to open stream: No such file or directory in /home/srts/public_html/v15/old/registerstudent.php on line 3
+[26-Mar-2018 19:59:29 UTC] PHP Fatal error:  require_once(): Failed opening required '/config.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/srts/public_html/v15/old/registerstudent.php on line 3
+[26-Mar-2018 19:59:31 UTC] PHP Warning:  require_once(/config.php): failed to open stream: No such file or directory in /home/srts/public_html/v15/old/registerstudent.php on line 3
+[26-Mar-2018 19:59:31 UTC] PHP Fatal error:  require_once(): Failed opening required '/config.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/srts/public_html/v15/old/registerstudent.php on line 3
+[26-Mar-2018 20:47:17 UTC] PHP Warning:  mysqli_stmt_execute() expects parameter 1 to be mysqli_stmt, boolean given in /home/srts/public_html/v15/old/resetscans.php on line 9
+[26-Mar-2018 20:47:17 UTC] PHP Warning:  mysqli_stmt_close() expects parameter 1 to be mysqli_stmt, boolean given in /home/srts/public_html/v15/old/resetscans.php on line 10
+[26-Mar-2018 20:48:30 UTC] PHP Warning:  mysqli_stmt_execute() expects parameter 1 to be mysqli_stmt, boolean given in /home/srts/public_html/v15/old/resetscans.php on line 9
+[26-Mar-2018 20:48:30 UTC] PHP Warning:  mysqli_stmt_close() expects parameter 1 to be mysqli_stmt, boolean given in /home/srts/public_html/v15/old/resetscans.php on line 10
+[26-Mar-2018 20:48:30 UTC] PHP Warning:  mysqli_stmt_execute() expects parameter 1 to be mysqli_stmt, boolean given in /home/srts/public_html/v15/old/resetscans.php on line 9
+[26-Mar-2018 20:48:30 UTC] PHP Warning:  mysqli_stmt_close() expects parameter 1 to be mysqli_stmt, boolean given in /home/srts/public_html/v15/old/resetscans.php on line 10
+[27-Mar-2018 01:49:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_error() in /home/srts/public_html/v15/old/dailyStudentAttendance.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/srts/public_html/v15/old/dailyStudentAttendance.php on line 36
+[27-Mar-2018 01:52:41 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/dailyStudentAttendance.php on line 40
+[27-Mar-2018 01:53:40 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/dailyStudentAttendance.php on line 37
+[27-Mar-2018 01:53:42 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/dailyStudentAttendance.php on line 37
+[27-Mar-2018 01:57:24 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/srts/public_html/v15/old/dailyattendance.php on line 33
+[27-Mar-2018 02:25:51 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/srts/public_html/v15/old/login.php on line 123
+[27-Mar-2018 02:31:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysqliquery() in /home/srts/public_html/v15/old/login.php:82
+Stack trace:
+#0 {main}
+  thrown in /home/srts/public_html/v15/old/login.php on line 82
+[27-Mar-2018 02:35:11 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 82
+[27-Mar-2018 02:35:49 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 82
+[27-Mar-2018 02:35:52 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 82
+[27-Mar-2018 02:37:13 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 82
+[27-Mar-2018 02:37:16 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 82
+[27-Mar-2018 02:39:37 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 81
+[27-Mar-2018 02:40:15 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 81
+[27-Mar-2018 03:02:53 UTC] PHP Warning:  mysqli_query() expects parameter 2 to be string, object given in /home/srts/public_html/v15/old/login.php on line 75
+[27-Mar-2018 03:02:53 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:04:05 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:05:50 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:06:19 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:06:31 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:06:41 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:20:36 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:20:44 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:22:38 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, integer given in /home/srts/public_html/v15/old/login.php on line 79
+[27-Mar-2018 03:22:50 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, integer given in /home/srts/public_html/v15/old/login.php on line 79
+[27-Mar-2018 03:24:14 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:29:52 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:29:59 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 76
+[27-Mar-2018 03:32:39 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 77
+[27-Mar-2018 03:35:47 UTC] PHP Parse error:  syntax error, unexpected 'sleep' (T_STRING), expecting ',' or ';' in /home/srts/public_html/v15/old/login.php on line 77
+[27-Mar-2018 03:37:03 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/srts/public_html/v15/old/login.php on line 80
+[27-Mar-2018 03:41:53 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/srts/public_html/v15/old/login.php on line 52
+[27-Mar-2018 03:43:10 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, object given in /home/srts/public_html/v15/old/login.php on line 52
+[27-Mar-2018 03:44:53 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, object given in /home/srts/public_html/v15/old/login.php on line 42
+[27-Mar-2018 03:46:21 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, object given in /home/srts/public_html/v15/old/login.php on line 42
+[27-Mar-2018 03:46:27 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, object given in /home/srts/public_html/v15/old/login.php on line 42
+[27-Mar-2018 03:46:46 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, object given in /home/srts/public_html/v15/old/login.php on line 52
+[27-Mar-2018 03:47:57 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/v15/old/login.php on line 53
+[27-Mar-2018 04:13:32 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/v15/old/studentscans.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/srts/public_html/v15/old/studentscans.php on line 6
+[27-Mar-2018 04:15:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/v15/old/studentscans.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/srts/public_html/v15/old/studentscans.php on line 6
+[27-Mar-2018 04:53:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/v15/old/studentscans.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/srts/public_html/v15/old/studentscans.php on line 6
+[27-Mar-2018 04:55:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/srts/public_html/v15/old/studentscans.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/srts/public_html/v15/old/studentscans.php on line 18
+[03-Apr-2018 02:43:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'srts_system'@'localhost' (using password: YES) in /home/srts/public_html/custom-php/config.php on line 10
+[03-Apr-2018 02:44:44 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'srts_system'@'localhost' (using password: YES) in /home/srts/public_html/custom-php/config.php on line 10
+[03-Apr-2018 02:53:25 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'srts_system'@'localhost' (using password: YES) in /home/srts/public_html/custom-php/config.php on line 10
+[03-Apr-2018 02:56:13 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/custom-php/login.php on line 53
+[03-Apr-2018 02:59:05 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/custom-php/login.php on line 53
+[03-Apr-2018 03:02:49 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/srts/public_html/custom-php/login.php on line 53

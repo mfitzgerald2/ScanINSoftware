@@ -1,0 +1,105 @@
+-- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (armv7l)
+--
+-- Host: localhost    Database: srts
+-- ------------------------------------------------------
+-- Server version	5.5.44-0+deb8u1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attendance` (
+  `AtRFID` varchar(255) DEFAULT NULL,
+  `ScanTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `number` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendance`
+--
+
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `students`
+--
+
+DROP TABLE IF EXISTS `students`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `students` (
+  `LastName` varchar(255) NOT NULL,
+  `FirstName` varchar(255) DEFAULT NULL,
+  `RFID` varchar(255) DEFAULT NULL,
+  `LastScanTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DaysWalked` int(10) unsigned DEFAULT NULL,
+  `Class` varchar(255) DEFAULT NULL,
+  `already` int(11) DEFAULT NULL,
+  `grade` varchar(255) DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `RFID` (`RFID`)
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `students`
+--
+
+LOCK TABLES `students` WRITE;
+/*!40000 ALTER TABLE `students` DISABLE KEYS */;
+INSERT INTO `students` VALUES ('Test','Kid 2','e20051289412010814707cda','2017-04-05 04:00:00',37,'2',0,'2',112),('Test','Kid 3','e20051289412015714607c15','2017-03-29 19:13:21',2044,'3',0,'3',113),('Test','Kid 4','e20051289412013014607c81','2017-03-29 19:13:21',311,'4',0,'4',114),('Test','Kid 5','e20051289412007615806df5','2017-03-30 04:00:00',119,'5',0,'5',115),('Test','Kid 6','e200512894120207152078bb','2017-03-29 19:13:21',46,'6',0,'6',116),('Test','Kid 7','e20051289412015614607c19','2017-03-29 19:13:21',115,'7',0,'7',117),('Test','Kid 8','e20051289412017315507316','2017-03-29 18:53:37',262,'8',0,'8',118),('Test','Kid 9','e20051289412003415007605','2017-03-30 04:00:00',44,'9',0,'9',119),('Test','Kid 10','e20051289412014814607c39','2017-04-05 04:00:00',91,'10',0,'10',120),('Test','Kid 1','e20051289412004915007641','2016-11-18 05:00:00',6,'1',0,'1',121),('Strueh','Tim','e20051289412017814607bc1','2017-05-31 04:00:00',23,'EPICS',0,'0',122),('Lee','Soonam','e2005128941200231540756d','2017-05-05 04:00:00',13,'EPICS',0,'0',123),('Bartling','Jessica','e2005128941202031540729d','2017-04-05 04:00:00',5,'EPICS',0,'0',124),('Bazan','Renato','e20051289412016714607bed','2016-11-18 05:00:00',3,'EPICS',0,'0',125),('Devereux','Thomas','e20051289412022515507246','2016-11-12 05:00:00',2,'EPICS',0,'0',126),('Hunckler','Kevin','e20051289412022515207903','1970-01-01 00:01:16',33,'EPICS',0,'0',127),('Doak','Christopher','e200512894120258154071c1','2017-05-03 04:00:00',10,'EPICS',0,'0',128),('Dykes','Gregory','e20051289412012214707ca2','2017-05-05 04:00:00',13,'EPICS',0,'0',129),('Gryzlo','Matt','e20051289412013314707c76','2000-01-31 07:22:36',19,'EPICS',0,'0',130),('Kesim','Hilal','e20051289412027814907a34','2000-01-01 00:01:05',8,'EPICS',0,'0',131),('Orlov','Artemiy','e2005128941200401550752a','2016-11-15 14:16:57',2,'EPICS',0,'0',132),('Wolf','Samantha','e20051289412011614707cba','2017-04-26 04:00:00',10,'EPICS',0,'0',133),('Pierce','Andrew','e2005128941202271520790b','2016-11-19 05:00:00',5,'EPICS',0,'0',134),('Brown','Pamela','e20051289412022215407251','2017-07-14 04:00:00',6,'EPICS',0,'0',135),('Rainwater','Anna','e2005128941202711550718e','2016-11-19 05:00:00',5,'EPICS',0,'0',136),('AbuMulaweh','Nusaybah','e200512894120157151077f2','2016-11-19 05:00:00',5,'EPICS',0,'0',137),('Orzech','Kyle','e2005128941200431550751e','2017-04-07 04:00:01',2,'EPICS',0,'0',138),('Buss','Tim','e2005128941201911510787a','2016-11-18 05:00:00',1,'EPICS',0,'0',139),('Kalife','Thiago','e20051289412020915407285','2016-11-18 05:00:00',1,'EPICS',0,'0',140),('Just','Jacob','e20051289412013714607c65','2016-11-18 05:00:00',1,'EPICS',0,'0',141),('Lontoc','Dean','e20051289412026314607a6d','2016-11-19 05:00:00',2,'EPICS',0,'0',142),('Giammatteo','Scott','e20051289412028114607a25','2016-11-19 05:00:00',2,'EPICS',0,'0',143),('Wallace','Erin','e20051289412012915307784','2017-04-26 04:00:00',9,'EPICS',0,'0',144),('Webster','Katie','e20051289412025114907aa0','2017-04-26 04:00:00',8,'EPICS',0,'0',145),('Rajaneesh','Nikita','e2005128941202801560716b','2017-04-26 04:00:00',7,'EPICS',0,'0',146),('Scott','Natalie','e2005128941202401520793f','2017-04-26 04:00:00',9,'EPICS',0,'0',148);
+/*!40000 ALTER TABLE `students` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tag` (
+  `RFID` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tag`
+--
+
+LOCK TABLES `tag` WRITE;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` VALUES ('e2005128941202351540721d');
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 1969-12-31 19:41:42

@@ -1,0 +1,172 @@
+[
+    {
+        "editor_class": "Editor",
+        "time": "2018-04-08T05:11:23.608730",
+        "text_widget_id": 1971218448,
+        "sequence": "EditorTextCreated",
+        "editor_id": 1971133872,
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "editor_class": "Editor",
+        "time": "2018-04-08T05:11:23.609957",
+        "text_widget_id": 1971218448,
+        "sequence": "Open",
+        "filename": "/home/pi/Desktop/TestAndAnalyze.py",
+        "editor_id": 1971133872,
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "index1": "1.0",
+        "text_widget_id": 1971218448,
+        "sequence": "TextDelete",
+        "index2": "2.0",
+        "time": "2018-04-08T05:11:23.689567",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:23.709045",
+        "index": "1.0",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "import time\nimport serial\nimport binascii\n\nabort_after = 15\ncount = 0\n\nrfid_serial = serial.Serial(\n        port='/dev/ttyS0',\n        baudrate = 57600,\n        parity=serial.PARITY_NONE,\n        stopbits=serial.STOPBITS_ONE,\n        bytesize=serial.EIGHTBITS,\n        timeout=0\n)\n\n#angle = input(\"Angle of tag being scanned: \")\nrfid_serial.flushInput()\nstart = time.time()\nwhile True:\n        delta_time = time.time() - start\n        if (delta_time >= abort_after):\n                break\n        bytesToRead = rfid_serial.inWaiting()\n        if (bytesToRead > 0):\n                x = rfid_serial.read(18)\n                x = binascii.hexlify(x)\n                print x\n                #print(\"\\n\")\n                if (x[0:4] == '1100'):\n                        count = count + 1\n\nfrequency = count / float(abort_after)\n#with open(\"results.txt\", \"a\") as myfile:\n#        myfile.write(\"Number of scans at %s  degrees in %s seconds: %s scans \\n\" % (angle, abort_after, count))\n#        myfile.write(\"Frequency: %s \\n\" % (frequency))\n#with open(\"csvResults.txt\", \"a\") as myfile:\n#        myfile.write(\"%s,%s,%s,%s \\n\" % (angle, abort_after, count,frequency)) #creates csv of (test angle, time scanned, count, frequency)\n#print(\"Finished!\")\n#print \"Number of scans at\",angle,\"degrees in\",abort_after,\"seconds:\",count,\"scans\"\n#print \"Number of scans per second:\",frequency\n",
+        "tags": "()",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "sequence": "ShowView",
+        "time": "2018-04-08T05:11:23.724774",
+        "view_class": "ShellView",
+        "view_id": "ShellView"
+    },
+    {
+        "sequence": "<FocusIn>",
+        "widget_id": 1983938512,
+        "widget_class": "Workbench",
+        "time": "2018-04-08T05:11:23.970173"
+    },
+    {
+        "text_widget_context": "shell",
+        "time": "2018-04-08T05:11:24.044351",
+        "index": "1.0",
+        "text_widget_id": 1971073424,
+        "sequence": "TextInsert",
+        "text": "Python 3.5.3 (/usr/bin/python3)",
+        "tags": "('welcome',)",
+        "text_widget_class": "ShellText"
+    },
+    {
+        "text_widget_context": "shell",
+        "time": "2018-04-08T05:11:24.048028",
+        "index": "1.31",
+        "text_widget_id": 1971073424,
+        "sequence": "TextInsert",
+        "text": "\n",
+        "tags": "('io',)",
+        "text_widget_class": "ShellText"
+    },
+    {
+        "text_widget_context": "shell",
+        "time": "2018-04-08T05:11:24.049614",
+        "index": "2.0",
+        "text_widget_id": 1971073424,
+        "sequence": "TextInsert",
+        "text": ">>> ",
+        "tags": "('toplevel', 'prompt')",
+        "text_widget_class": "ShellText"
+    },
+    {
+        "text_widget_id": 1971218448,
+        "sequence": "<Button-1>",
+        "time": "2018-04-08T05:11:26.415205",
+        "widget_id": 1971218448,
+        "widget_class": "CodeViewText",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "index1": "9.19",
+        "text_widget_id": 1971218448,
+        "sequence": "TextDelete",
+        "index2": "9.24",
+        "time": "2018-04-08T05:11:28.802926",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:28.811089",
+        "index": "9.19",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "s",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:28.921979",
+        "index": "9.20",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "e",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:29.017724",
+        "index": "9.21",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "r",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:29.179418",
+        "index": "9.22",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "i",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:29.308296",
+        "index": "9.23",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "a",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:29.440097",
+        "index": "9.24",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "l",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-08T05:11:30.276228",
+        "index": "9.25",
+        "text_widget_id": 1971218448,
+        "sequence": "TextInsert",
+        "text": "0",
+        "tags": "None",
+        "text_widget_class": "CodeViewText"
+    },
+    {
+        "sequence": "<Button-1>",
+        "widget_id": 1971043504,
+        "widget_class": "Button",
+        "time": "2018-04-08T05:11:31.891384"
+    },
+    {
+        "editor_class": "Editor",
+        "time": "2018-04-08T05:11:31.992374",
+        "text_widget_id": 1971218448,
+        "sequence": "Save",
+        "filename": "/home/pi/Desktop/TestAndAnalyze.py",
+        "editor_id": 1971133872,
+        "text_widget_class": "CodeViewText"
+    }
+]

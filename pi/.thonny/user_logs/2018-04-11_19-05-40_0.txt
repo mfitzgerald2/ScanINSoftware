@@ -1,0 +1,2051 @@
+[
+    {
+        "editor_id": 1970245232,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:40.661575",
+        "editor_class": "Editor",
+        "sequence": "EditorTextCreated"
+    },
+    {
+        "editor_id": 1970245232,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:40.662705",
+        "editor_class": "Editor",
+        "sequence": "Open",
+        "filename": "/home/pi/Desktop/SRTS_Code/DB_Controller.py"
+    },
+    {
+        "index2": "2.0",
+        "index1": "1.0",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:40.744705",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:40.780321",
+        "sequence": "TextInsert",
+        "tags": "()",
+        "index": "1.0",
+        "text": "#Database Controller for SRTS Scanner\n#This file has all of the database accessing code.\n\nimport time\nimport MySQLdb\nimport datetime\nimport random\n\nfrom MatrixController import RGBColors, Message\n\nDB_ADDRESS = \"localhost\"\nDB_USER = \"root\"\nDB_PASS = \"pi\"\nDB_NAME = \"srts\"\n\n# Connect to the database\ndb = MySQLdb.connect(DB_ADDRESS, DB_USER, DB_PASS, DB_NAME)\n\n\n# Reset student walk status for the day\n# now = datetime.datetime.now()\n# if now.hour <= 7 and now.hour >= 17:\n# \treset_already()\n\n\n# LED Matrix code\n# The matrix is run as a seperate process\n# with a queue used for interprocess communication\n\n# create a new message given student's first name\ndef make_message(student_first_name):\n\ttext = \"Good job %s!\" % student_first_name\n\tcolor = RGBColors[random.randint(0, len(RGBColors) - 1)]\n\tmessage = Message(text, color)\n\treturn message\n\n# Resets the student already walked status\n# in the database.\ndef reset_already():\n\tglobal db\n\tdb = MySQLdb.connect(DB_ADDRESS, DB_USER, DB_PASS, DB_NAME)\n\tcursor = db.cursor()\n\tsql = \"UPDATE students SET already = 0\"\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\t\n\n# If a valid tag number is found, run it against the DB.\ndef process_scan(q, tag_number):\n\t# Update days walked if necessary.\n\tdb.ping(True)\n\tname = \"12\"\n\tcursor = db.cursor()\n\tsql = \"SELECT FirstName FROM students WHERE RFID = '%s' AND already = 0\" % tag_number\n\ttry:\n\t\tcursor.execute(sql)\n\t\tname = cursor.fetchone()\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\n\tif name is not None:\n\t\tmessage = make_message(name[0])\n\t#print(\"put message: %s\" % name)\n\t#print(\"put message: %s\" % message.text)\n\t\tq.put(message)\n\t\tprint name\n\t\n\t\n\tsql = \"UPDATE students SET DaysWalked = DaysWalked + 1 WHERE RFID = '%s' AND already = '0'\" % tag_number\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\n\t# Update attendance table with RFID number.\n\tsql = \"INSERT INTO attendance (AtRFID) SELECT students.RFID FROM students WHERE already = '0' and RFID = '%s'\" % tag_number\t\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\t\n\t# Update already status.\n\tsql = \"UPDATE students SET already = 1 WHERE RFID = '%s'\" % tag_number\t\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\t\n\t# Update temporary tag ID table\n\tsql = \"UPDATE tag SET RFID = '%s'\" % tag_number\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\n"
+    },
+    {
+        "view_id": 1970186160,
+        "time": "2018-04-11T19:05:40.797425",
+        "sequence": "ShowView",
+        "view_class": "ShellView"
+    },
+    {
+        "time": "2018-04-11T19:05:41.047498",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "text_widget_class": "ShellText",
+        "text_widget_id": 1970185040,
+        "time": "2018-04-11T19:05:41.066481",
+        "sequence": "TextInsert",
+        "tags": "('welcome',)",
+        "index": "1.0",
+        "text_widget_context": "shell",
+        "text": "Python 3.5.3 (/usr/bin/python3)"
+    },
+    {
+        "text_widget_class": "ShellText",
+        "text_widget_id": 1970185040,
+        "time": "2018-04-11T19:05:41.071040",
+        "sequence": "TextInsert",
+        "tags": "('io',)",
+        "index": "1.31",
+        "text_widget_context": "shell",
+        "text": "\n"
+    },
+    {
+        "text_widget_class": "ShellText",
+        "text_widget_id": 1970185040,
+        "time": "2018-04-11T19:05:41.072777",
+        "sequence": "TextInsert",
+        "tags": "('toplevel', 'prompt')",
+        "index": "2.0",
+        "text_widget_context": "shell",
+        "text": ">>> "
+    },
+    {
+        "time": "2018-04-11T19:05:46.881857",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T19:05:47.885465",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:53.127425",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:55.089016",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.15",
+        "text": "_"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:56.165554",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.16",
+        "text": "m"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:56.408916",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.17",
+        "text": "i"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:56.776788",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.18",
+        "text": "g"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:57.021443",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.19",
+        "text": "r"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:57.208796",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.20",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:57.472728",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.21",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:57.648754",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.22",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:57.768785",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "14.23",
+        "text": "d"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:05:58.805057",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:06.469357",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:06.648053",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "73.23",
+        "index1": "73.15",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:07.831116",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:07.839020",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.15",
+        "text": "u"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:08.040836",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.16",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:08.256931",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.17",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:08.432850",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.18",
+        "text": "r"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:08.624873",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.19",
+        "text": "s"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:09.733142",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:16.165154",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:17.534104",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.1",
+        "text": "/"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:17.645659",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.2",
+        "text": "/"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:18.429720",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "74.1",
+        "text": "/"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:18.541609",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "74.2",
+        "text": "/"
+    },
+    {
+        "index2": "None",
+        "index1": "73.2",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:20.878395",
+        "sequence": "TextDelete"
+    },
+    {
+        "index2": "None",
+        "index1": "73.1",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:20.993351",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:22.013818",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "73.1",
+        "text": "#"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:23.553067",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "74.1",
+        "text": "#"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:24.757797",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "75.1",
+        "text": "#"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:28.549555",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "76.1",
+        "text": "#"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:30.040973",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "77.1",
+        "text": "#"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:31.094139",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "78.1",
+        "text": "#"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:33.126111",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:37.189623",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-11T19:06:39.399727",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T19:06:39.533903",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T19:06:39.927802",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T19:06:41.853541",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:42.821712",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:43.007649",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "81.55",
+        "index1": "81.47",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:44.479252",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:44.487106",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.47",
+        "text": "u"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:44.595838",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.48",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:44.745370",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.49",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:44.889210",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.50",
+        "text": "r"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:45.081175",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.51",
+        "text": "d"
+    },
+    {
+        "index2": "None",
+        "index1": "81.51",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:45.854647",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:46.065337",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.51",
+        "text": "s"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:47.060965",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:47.251252",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "81.57",
+        "index1": "81.53",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:48.199285",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:48.207100",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.53",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:48.291945",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.54",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:48.601257",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.55",
+        "text": "g"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:49.637907",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:49.806784",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:50.401449",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:50.591988",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "81.70",
+        "index1": "81.62",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:51.376323",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:51.384984",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.62",
+        "text": "u"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:51.521290",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.63",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:51.721299",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.64",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:51.873282",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.65",
+        "text": "r"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:52.049291",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.66",
+        "text": "s"
+    },
+    {
+        "time": "2018-04-11T19:06:53.472255",
+        "widget_id": 1970345584,
+        "sequence": "<Button-1>",
+        "widget_class": "Scrollbar"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:56.198229",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:56.386475",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "81.81",
+        "index1": "81.74",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:57.495920",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:57.503946",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.74",
+        "text": "c"
+    },
+    {
+        "index2": "None",
+        "index1": "81.74",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.015100",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.169638",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.74",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.385461",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.75",
+        "text": "c"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.585387",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.76",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.705327",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.77",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.838164",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.78",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:06:59.945450",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.79",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:00.145400",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.80",
+        "text": "d"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:02.292968",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:02.464771",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "81.96",
+        "index1": "81.92",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:04.007487",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:04.015469",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.92",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:04.117586",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.93",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:04.281216",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "81.94",
+        "text": "g"
+    },
+    {
+        "time": "2018-04-11T19:07:06.159216",
+        "widget_id": 1970345584,
+        "sequence": "<Button-1>",
+        "widget_class": "Scrollbar"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:10.261952",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:10.431330",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "89.35",
+        "index1": "89.28",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:11.671995",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:11.680109",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.28",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:11.905516",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.29",
+        "text": "c"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:12.105388",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.30",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:12.201367",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.31",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:12.338901",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.32",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:12.441211",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.33",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:12.574757",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.34",
+        "text": "d"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:13.606036",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:27.973806",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:28.175365",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "43.35",
+        "index1": "43.28",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:31.631849",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:31.639846",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.28",
+        "text": "c"
+    },
+    {
+        "index2": "None",
+        "index1": "43.28",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:31.914217",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.017600",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.28",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.217488",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.29",
+        "text": "c"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.417588",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.30",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.534196",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.31",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.673549",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.32",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.777538",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.33",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:32.913435",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "43.34",
+        "text": "d"
+    },
+    {
+        "time": "2018-04-11T19:07:35.026919",
+        "widget_id": 1970185552,
+        "sequence": "<Button-1>",
+        "widget_class": "Button"
+    },
+    {
+        "editor_id": 1970245232,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T19:07:35.132817",
+        "editor_class": "Editor",
+        "sequence": "Save",
+        "filename": "/home/pi/Desktop/SRTS_Code/DB_Controller.py"
+    },
+    {
+        "time": "2018-04-11T20:29:25.832673",
+        "widget_id": 1970135568,
+        "sequence": "<Button-1>",
+        "widget_class": "AutomaticPanedWindow"
+    },
+    {
+        "time": "2018-04-11T20:36:11.651525",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:36:12.447763",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:36:14.197152",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:48:58.117561",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:12.640494",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:12.870219",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "57.38",
+        "index1": "57.30",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:16.597067",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:16.604840",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.30",
+        "text": "u"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:16.744651",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.31",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:16.942828",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.32",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:17.094806",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.33",
+        "text": "r"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:17.278692",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.34",
+        "text": "s"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:21.562512",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:21.732790",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-11T20:49:22.678702",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:49:23.761649",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:49:25.770605",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:49:41.972920",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:49:42.928148",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:49:44.127619",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:44.710185",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:44.926612",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "57.46",
+        "index1": "57.42",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:46.039744",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:46.047428",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.42",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:46.188103",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.43",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:46.377764",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.44",
+        "text": "g"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:47.527269",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:48.049638",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:48.641452",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:48.831132",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "57.64",
+        "index1": "57.57",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:49.743334",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:49.751186",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.57",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:49.945662",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.58",
+        "text": "c"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:51.069380",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.59",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:51.225014",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.60",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:51.360717",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.61",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:51.464755",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.62",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:49:51.632768",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "57.63",
+        "text": "d"
+    },
+    {
+        "time": "2018-04-11T20:49:52.772953",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:49:54.860321",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:50:01.165315",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:50:09.242721",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:50:10.685727",
+        "sequence": "<Button-1>",
+        "widget": ".#1971454512"
+    },
+    {
+        "time": "2018-04-11T20:50:11.455858",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:50:13.033330",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:13.426108",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:14.109996",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:14.466204",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:19.373395",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:34.382564",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:34.715064",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "97.27",
+        "index1": "97.23",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:38.447736",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:38.455598",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.23",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:38.585839",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.24",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:38.769478",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.25",
+        "text": "g"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:40.317992",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:40.488733",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "97.18",
+        "index1": "97.15",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:42.263000",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:42.270713",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.15",
+        "text": "l"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:42.389933",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.16",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:42.569001",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.17",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:42.785261",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.18",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:43.189839",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.19",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:43.448915",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.20",
+        "text": "c"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:43.712828",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.21",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:43.785285",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.22",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:44.024962",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.23",
+        "text": "n"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:44.200805",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.24",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:44.400805",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.25",
+        "text": "d"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:45.581288",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:46.184977",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:46.359012",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "89.23",
+        "index1": "89.15",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:47.262450",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:47.270245",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.15",
+        "text": "u"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:47.848344",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.16",
+        "text": "s"
+    },
+    {
+        "index2": "None",
+        "index1": "89.16",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:47.944829",
+        "sequence": "TextDelete"
+    },
+    {
+        "index2": "None",
+        "index1": "89.15",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:48.181778",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:48.920246",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.15",
+        "text": "u"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:49.012846",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.16",
+        "text": "s"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:49.213621",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.17",
+        "text": "e"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:49.360178",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.18",
+        "text": "r"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:49.560183",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.19",
+        "text": "s"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:51.276264",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:51.527200",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:52.301188",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:52.760107",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:52.934795",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "index2": "89.47",
+        "index1": "89.43",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:54.029564",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:54.037651",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.43",
+        "text": "t"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:54.503457",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.44",
+        "text": "a"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:54.631343",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.45",
+        "text": "a"
+    },
+    {
+        "index2": "None",
+        "index1": "89.45",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:56.101033",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:50:56.767179",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "89.45",
+        "text": "g"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:51:09.065986",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:51:09.251576",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-11T20:51:15.467160",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:51:16.059967",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:51:17.580251",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:51:17.982372",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:51:18.569240",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "editor_id": 1951661296,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:51:51.796088",
+        "sequence": "EditorTextCreated",
+        "editor_class": "Editor"
+    },
+    {
+        "editor_id": 1951661296,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:51:51.797311",
+        "editor_class": "Editor",
+        "sequence": "Open",
+        "filename": "/home/pi/Desktop/SRTS_Code/DB_Controllerold.py"
+    },
+    {
+        "index2": "2.0",
+        "index1": "1.0",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:51:51.799914",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:51:51.813506",
+        "sequence": "TextInsert",
+        "tags": "()",
+        "index": "1.0",
+        "text": "#Database Controller for SRTS Scanner\n#This file has all of the database accessing code.\n\nimport time\nimport MySQLdb\nimport datetime\nimport random\n\nfrom MatrixController import RGBColors, Message\n\nDB_ADDRESS = \"localhost\"\nDB_USER = \"root\"\nDB_PASS = \"pi\"\nDB_NAME = \"srts\"\n\n# Connect to the database\ndb = MySQLdb.connect(DB_ADDRESS, DB_USER, DB_PASS, DB_NAME)\n\n\n# Reset student walk status for the day\n# now = datetime.datetime.now()\n# if now.hour <= 7 and now.hour >= 17:\n# \treset_already()\n\n\n# LED Matrix code\n# The matrix is run as a seperate process\n# with a queue used for interprocess communication\n\n# create a new message given student's first name\ndef make_message(student_first_name):\n\ttext = \"Good job %s!\" % student_first_name\n\tcolor = RGBColors[random.randint(0, len(RGBColors) - 1)]\n\tmessage = Message(text, color)\n\treturn message\n\n# Resets the student already walked status\n# in the database.\ndef reset_already():\n\tglobal db\n\tdb = MySQLdb.connect(DB_ADDRESS, DB_USER, DB_PASS, DB_NAME)\n\tcursor = db.cursor()\n\tsql = \"UPDATE students SET already = 0\"\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\t\n\n# If a valid tag number is found, run it against the DB.\ndef process_scan(q, tag_number):\n\t# Update days walked if necessary.\n\tdb.ping(True)\n\tname = \"12\"\n\tcursor = db.cursor()\n\tsql = \"SELECT FirstName FROM students WHERE RFID = '%s' AND already = 0\" % tag_number\n\ttry:\n\t\tcursor.execute(sql)\n\t\tname = cursor.fetchone()\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\n\tif name is not None:\n\t\tmessage = make_message(name[0])\n\t#print(\"put message: %s\" % name)\n\t#print(\"put message: %s\" % message.text)\n\t\tq.put(message)\n\t\tprint name\n\t\n\t\n\tsql = \"UPDATE students SET DaysWalked = DaysWalked + 1 WHERE RFID = '%s' AND already = '0'\" % tag_number\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\n\t# Update attendance table with RFID number.\n\tsql = \"INSERT INTO attendance (AtRFID) SELECT students.RFID FROM students WHERE already = '0' and RFID = '%s'\" % tag_number\t\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\t\n\t# Update already status.\n\tsql = \"UPDATE students SET already = 1 WHERE RFID = '%s'\" % tag_number\t\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\t\n\t# Update temporary tag ID table\n\tsql = \"UPDATE tag SET RFID = '%s'\" % tag_number\n\ttry:\n\t\tcursor.execute(sql)\n\t\tdb.commit()\n\texcept:\n\t\tdb.rollback()\n\n"
+    },
+    {
+        "time": "2018-04-11T20:51:51.978509",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:51:53.127202",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:51:54.571749",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "widget_id": 1951660816,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:52:20.240823",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1951660816,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:52:20.622344",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1951660816,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:52:21.553668",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1951660816,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:52:21.742648",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1951660816,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:52:27.552376",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1951660816,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1951660816,
+        "time": "2018-04-11T20:52:27.739805",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-11T20:52:30.578813",
+        "widget_id": 1970136464,
+        "sequence": "<Button-1>",
+        "widget_class": "EditorNotebook"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:33.169964",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "widget_id": 1970326192,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:33.355982",
+        "sequence": "<Button-1>",
+        "widget_class": "CodeViewText"
+    },
+    {
+        "time": "2018-04-11T20:52:34.494963",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:52:36.167358",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:52:36.882879",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T20:52:45.141303",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "index2": "97.34",
+        "index1": "97.31",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:47.479996",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:47.487817",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.31",
+        "text": "R"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:47.729996",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.32",
+        "text": "F"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:48.026029",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.33",
+        "text": "I"
+    },
+    {
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:48.201865",
+        "sequence": "TextInsert",
+        "tags": "None",
+        "index": "97.34",
+        "text": "D"
+    },
+    {
+        "time": "2018-04-11T20:52:50.813680",
+        "widget_id": 1970185552,
+        "sequence": "<Button-1>",
+        "widget_class": "Button"
+    },
+    {
+        "editor_id": 1970245232,
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1970326192,
+        "time": "2018-04-11T20:52:50.901118",
+        "editor_class": "Editor",
+        "sequence": "Save",
+        "filename": "/home/pi/Desktop/SRTS_Code/DB_Controller.py"
+    },
+    {
+        "time": "2018-04-11T20:52:54.767054",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T21:29:32.476939",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T21:29:32.783523",
+        "widget_id": 1983549520,
+        "sequence": "<FocusOut>",
+        "widget_class": "Workbench"
+    },
+    {
+        "time": "2018-04-11T21:29:33.175596",
+        "widget_id": 1983549520,
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench"
+    }
+]

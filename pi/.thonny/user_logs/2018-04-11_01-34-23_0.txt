@@ -1,0 +1,78 @@
+[
+    {
+        "editor_class": "Editor",
+        "sequence": "EditorTextCreated",
+        "time": "2018-04-11T01:34:23.441073",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1971028304,
+        "editor_id": 1970944080
+    },
+    {
+        "editor_class": "Editor",
+        "sequence": "Open",
+        "time": "2018-04-11T01:34:23.442581",
+        "text_widget_class": "CodeViewText",
+        "filename": "/home/pi/Desktop/TestAndAnalyze.py",
+        "text_widget_id": 1971028304,
+        "editor_id": 1970944080
+    },
+    {
+        "index2": "2.0",
+        "index1": "1.0",
+        "time": "2018-04-11T01:34:23.526101",
+        "sequence": "TextDelete",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1971028304
+    },
+    {
+        "index": "1.0",
+        "time": "2018-04-11T01:34:23.568865",
+        "sequence": "TextInsert",
+        "text": "import time\nimport serial\nimport binascii\n\nabort_after = 15\ncount = 0\n\nrfid_serial = serial.Serial(\n        port='/dev/ttyS0',\n        baudrate = 57600,\n        parity=serial.PARITY_NONE,\n        stopbits=serial.STOPBITS_ONE,\n        bytesize=serial.EIGHTBITS,\n        timeout=0\n)\n\n#angle = input(\"Angle of tag being scanned: \")\nrfid_serial.flushInput()\nstart = time.time()\nwhile True:\n        delta_time = time.time() - start\n        if (delta_time >= abort_after):\n                break\n        bytesToRead = rfid_serial.inWaiting()\n        if (bytesToRead > 0):\n                x = rfid_serial.read(18)\n                x = binascii.hexlify(x)\n                print x\n                #print(\"\\n\")\n                if (x[0:4] == '1100'):\n                        count = count + 1\n\nfrequency = count / float(abort_after)\n#with open(\"results.txt\", \"a\") as myfile:\n#        myfile.write(\"Number of scans at %s  degrees in %s seconds: %s scans \\n\" % (angle, abort_after, count))\n#        myfile.write(\"Frequency: %s \\n\" % (frequency))\n#with open(\"csvResults.txt\", \"a\") as myfile:\n#        myfile.write(\"%s,%s,%s,%s \\n\" % (angle, abort_after, count,frequency)) #creates csv of (test angle, time scanned, count, frequency)\n#print(\"Finished!\")\n#print \"Number of scans at\",angle,\"degrees in\",abort_after,\"seconds:\",count,\"scans\"\n#print \"Number of scans per second:\",frequency\n",
+        "text_widget_class": "CodeViewText",
+        "text_widget_id": 1971028304,
+        "tags": "()"
+    },
+    {
+        "sequence": "ShowView",
+        "view_id": "ShellView",
+        "time": "2018-04-11T01:34:23.584608",
+        "view_class": "ShellView"
+    },
+    {
+        "widget_id": 1983326000,
+        "sequence": "<FocusIn>",
+        "time": "2018-04-11T01:34:23.798442",
+        "widget_class": "Workbench"
+    },
+    {
+        "text": "Python 3.5.3 (/usr/bin/python3)",
+        "index": "1.0",
+        "time": "2018-04-11T01:34:23.903632",
+        "sequence": "TextInsert",
+        "text_widget_context": "shell",
+        "text_widget_class": "ShellText",
+        "text_widget_id": 1970885232,
+        "tags": "('welcome',)"
+    },
+    {
+        "text": "\n",
+        "index": "1.31",
+        "time": "2018-04-11T01:34:23.907877",
+        "sequence": "TextInsert",
+        "text_widget_context": "shell",
+        "text_widget_class": "ShellText",
+        "text_widget_id": 1970885232,
+        "tags": "('io',)"
+    },
+    {
+        "text": ">>> ",
+        "index": "2.0",
+        "time": "2018-04-11T01:34:23.909897",
+        "sequence": "TextInsert",
+        "text_widget_context": "shell",
+        "text_widget_class": "ShellText",
+        "text_widget_id": 1970885232,
+        "tags": "('toplevel', 'prompt')"
+    }
+]

@@ -1,0 +1,108 @@
+-- MySQL dump 10.16  Distrib 10.1.23-MariaDB, for debian-linux-gnueabihf (armv7l)
+--
+-- Host: localhost    Database: srts_migrated
+-- ------------------------------------------------------
+-- Server version	10.1.23-MariaDB-9+deb9u1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attendance` (
+  `AtRFID` varchar(255) DEFAULT NULL,
+  `ScanTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `number` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`number`)
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendance`
+--
+
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+INSERT INTO `attendance` VALUES ('e20051289412007614707d5a','2018-04-11 20:56:44',1),('e20051289412025414907a94','2018-04-11 22:59:16',2),('e20051289412025414907a94','2018-04-11 22:59:16',3),('e20051289412011614807cbb','2018-04-11 23:45:36',4),('e2005128941200841550747a','2018-04-11 23:45:48',5),('e20051289412011114807ccf','2018-04-11 23:45:55',6),('e200512894120262158070dd','2018-04-12 00:27:32',7),('e20051289412024614907ab4','2018-04-12 00:27:52',8),('e20051289412024614907ab4','2018-04-12 00:27:52',9),('e20051289412010014707cfa','2018-04-12 00:28:05',10),('e20051289412028615707154','2018-04-12 00:28:09',11),('e20051289412003815207617','2018-04-12 00:28:15',12),('e20051289412023714607ad5','2018-04-12 00:28:25',13),('e20051289412018115007851','2018-04-12 00:28:33',14),('e200512894120022150075d5','2018-04-12 00:28:39',15),('e20051289412010714707cde','2018-04-12 00:28:43',16),('e20051289412023514607add','2018-04-12 00:28:47',17),('e20051289412009015507462','2018-04-12 00:28:51',18),('e20051289412011414707cc2','2018-04-12 00:28:53',19),('e20051289412011014707cd2','2018-04-12 00:29:39',20),('e20051289412027215807105','2018-04-12 00:29:46',21),('e20051289412020214607b61','2018-04-12 00:30:32',22),('e2005128941201921500787d','2018-04-12 00:30:35',23),('e2005128941201081550741a','2018-04-12 00:31:11',24);
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lastscanned`
+--
+
+DROP TABLE IF EXISTS `lastscanned`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lastscanned` (
+  `RFID` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lastscanned`
+--
+
+LOCK TABLES `lastscanned` WRITE;
+/*!40000 ALTER TABLE `lastscanned` DISABLE KEYS */;
+INSERT INTO `lastscanned` VALUES ('e20051289412025414907a94');
+/*!40000 ALTER TABLE `lastscanned` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `FirstName` varchar(255) NOT NULL,
+  `LastName` varchar(255) NOT NULL,
+  `parent` int(11) DEFAULT NULL,
+  `grade` varchar(255) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `tag` varchar(255) DEFAULT NULL,
+  `scanned` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'matt','$2y$10$YzM3x9pfNX2trlAZ/lRzFehKCf9yUPj2HstugKdvBXjIvhD5okJia','2018-03-26 20:15:11','Matthew','Fitzgerald',3,'3','2245007814','e200500045190280141088be',0),(2,'mamama','$2y$10$LVI/xzGzAe1fyUQc8M4/P.SDXElU7Iz6d94qwaQ21kcM7nl6WekHW','2018-04-03 02:54:02','mamama','mamama',3,'1','2783','e200500045190280141088be',0),(3,'tlove','$2y$10$A5D8awh3usxy7uoJch.FOua878Utjsfh7P2JamTNPbUa4ZHX7JUW.','2018-04-11 20:42:21','Taylor','Love',3,'I2R','222222','e20051289412007614707d5a',0),(37,'asanchez','$2y$10$uqQnDJc0Y/xSfHTw.PI7ieFrgsyVQ2605fvZbJ5y3tzuxQI7NU0zq','2018-04-11 22:45:47','Adriana','Sanchez',3,'I2R','111111','e20051289412023714607ad5',1),(36,'wmao','$2y$10$1zk2x5Tt9EUFUTfFIZd2AOsJQe4haJZnGuN0aOYW9DqTOEPBpQHVO','2018-04-11 22:44:40','William','Mao',3,'I2R','111111','e200512894120022150075d5',1),(6,'mchandler','$2y$10$5KPva8l3y9xvqg4eK0BzluJoX04ZaOs6/Z1X1DytEz8ydTos6Fc4G','2018-04-11 22:13:32','Michaela','Chandler',3,'I2R','11111','e20051289412010014707cfa',1),(7,'cobryan','$2y$10$GFWJvvjPIH6UEkbEwE8z2uTIABpFJH7qOkTao6NBwv.6iBQNO1KLq','2018-04-11 22:15:28','Casey','OBryan',3,'I2R','11111','e2005128941201921500787d',1),(8,'cvillalobos','$2y$10$l8zVy9S.X4FFHZdAE29qi.n.WFSryEgO6dv4RrPtVgPQeHKQCzQnq','2018-04-11 22:16:48','Connor','Villalobos',3,'I2R','11111','e20051289412010714707cde',1),(9,'hparker','$2y$10$I2GFKC7O6b/n1TMncU.nQ.4seBqHj0XUo7GsP0HqaBINGdfrZgeem','2018-04-11 22:17:41','Heather','Parker',3,'I2R','11111','e20051289412011014707cd2',1),(10,'mporter','$2y$10$IWC1kUJ4twzMVh9qMxo45.n4756MhzeDfRwkrD86Xz8b81nb/1vFS','2018-04-11 22:18:21','Mary','Porter',3,'I2R','11111','e20051289412018115007851',1),(11,'jdeitrich','$2y$10$4EvMo0nsH8eqL2/DfkFyDeakvDYcYVxS2GpuhI3OkYvJyzG9Nf2n6','2018-04-11 22:19:20','Jacob','Deitrich',3,'I2R','111111','e20051289412011414707cc2',1),(12,'araz','$2y$10$chsEJ6W31r7X.ejiIiccE.KPLliFk194R1j42sc56rwpcpz.k35fK','2018-04-11 22:19:59','Abraham','Raz',3,'I2R','111111','e200512894120071154074ad',0),(13,'kjohnson','$2y$10$1OsOu.jRdM8avmdhoeP2oefGwHyLSmj0PI0FiQ14664GmqJeMSI4i','2018-04-11 22:20:35','Katie','Johnson',3,'I2R','111111','e20051289412023514607add',1),(14,'dhodgson','$2y$10$YAqK2om4b.oXe9Jpgbw5De9NuWQRyPhZWu5x0dKeyhMht/jMTfiOO','2018-04-11 22:21:28','Dylan','Hodgson',3,'I2R','111111','e200512894120262158070dd',1),(15,'relrod','$2y$10$WWhj1covh7d1WLU8h6oWl.e1BEtEt2gDguieCUxf.Wshhk/qbl0b6','2018-04-11 22:22:11','Rosalie','Elrod',3,'I2R','111111','e20051289412003815207617',1),(16,'egorenstein','$2y$10$RSQXeOgHGJmSL8m0ozN5AeHMymV2dzHw7t4lHwnd.WPt/FgNDR/ja','2018-04-11 22:22:54','Elina','Gorenstein',3,'I2R','111111','e20051289412018114807bb7',0),(17,'creel','$2y$10$Ux3sV5.ZY/518UCGcKbBZOLh5K1pj6.ifv7uUByEhWobFrGrflrHO','2018-04-11 22:23:33','Connor','Reel',3,'I2R','111111','e200512894120074155074a2',1),(18,'anufer','$2y$10$917ND99AIm2XAbiJ5zn5p.KUQ7ExqSK3ez6Vp7PsAS37afFERKP/6','2018-04-11 22:24:19','Andrea','Nufer',3,'I2R','11111','e20051289412025414907a94',1),(19,'nyenerich','$2y$10$PcwWoKR.1b6IgtybtE56.ejm97Vg1hHtAnZTgBfqqFMhbJCXSBdiy','2018-04-11 22:25:17','Noah','Yenerich',3,'I2R','111111','e2005128941201081550741a',1),(20,'kadams','$2y$10$aRZUHP2Orw2iPeu9f616HOqgjhaUjCr3OO2s/uaUN2nK/SOmDNK.a','2018-04-11 22:26:16','Kai','`Adams',3,'I2R','111111','e20051289412025014807aa3',0),(21,'dzhang','$2y$10$9FukO36XQ.OGKt8jlWXupeItu0UUgDON3U0ms/HDTwPxteMJrK2Pq','2018-04-11 22:26:56','Daniel','Zhang',3,'I2R','111111','e20051289412011114807ccf',1),(22,'dflores','$2y$10$xntoJNQIXGvZU3s1NyMeKeB9cMWGjuo/cbk7dI09tZVVb2Tz7ubi.','2018-04-11 22:28:05','Diane','Flores',3,'I2R','111111','e20051289412001414707e52',0),(23,'eholohan','$2y$10$5u10aDGaWJbv5gv6yFRj7ObhB9wtZbbK/7p2ipLnTOedKKgU1YIty','2018-04-11 22:28:49','Eleanor','Holohan',3,'I2R','111111','e20051289412028615707154',1),(24,'eblanchard','$2y$10$GwcS/Rx4it6Ovazd2xb0OOHwakIKqQyL.ZBasQ4NxImTSa3pICZYq','2018-04-11 22:29:32','Erica','Blanchard',3,'I2R','111111','e20051289412011015207737',0),(25,'bholden','$2y$10$9E.IVrtku1DtXGHYnrCHO.j1aayJhNRDPjGVF25TfVhYlL84jyopG','2018-04-11 22:30:33','Billy','Holden',3,'I2R','111111','e20051289412026514607a65',0),(26,'jgoins','$2y$10$Tr7oHDvdyoEc3rnvFujBXubYRMHoHTEGRFXCP68mdGZMyqNMjGskm','2018-04-11 22:31:27','Jaiden','Goins',3,'I2R','111111','e2005128941202321520791f',0),(27,'jthomas','$2y$10$izb09kOr62mqfQP8brrb/uMr8o5S7R0CPmxHKYqfYgFW.7qZgL91a','2018-04-11 22:32:12','Jordan','Thomas',3,'I2R','111111','e20051289412027715607177',0),(28,'jsaenz','$2y$10$wp74bfE5M.zH5HOJloPlmuLgBhIMCPuFbxjeiux68JkSPaauDVkBS','2018-04-11 22:33:16','Jared','Saenz',3,'I2R','111111','e20051289412026514607a65',0),(29,'rturner','$2y$10$6Z5.HXTsuhy3PTGS2BuDgO4EMfYOJntXm/TqFgYF/iFsA7JPA/Pry','2018-04-11 22:33:51','Richard','Turner',3,'I2R','111111','e20051289412027215807105',1),(30,'amao','$2y$10$IQddnPacqEQJU2LXDojQAOXalap8IIGJI8hlMYq0PcIJeP8sDF6uq','2018-04-11 22:34:54','Adrian','Mao',3,'I2R','111111','e20051289412009015507462',1),(31,'bflores','$2y$10$owu3.iigiG364pQv0xFxKOA2EqTb/DW.vIgRhPGMrWvfozooCesD6','2018-04-11 22:35:47','Berenice','Flores',3,'I2R','11111','e20051289412024614907ab4',1),(32,'ikrekeler','$2y$10$4BgYPmx0N3ybK53PMwuTDeGAC5nfPSpNrWbz1eHOlnV8Tlu1gzt3u','2018-04-11 22:36:45','Ian','Krekeler',3,'I2R','111111','e20051289412020214607b61',1),(33,'cblankenship','$2y$10$1bhLq8I.hBfQeJ3hQQV3mOFAMOqmDk2rryKUKqP1.46vzg.Y/A2Ri','2018-04-11 22:39:30','Carter','Blankenship',3,'I2R','111111','e2005128941200841550747a',1),(34,'kswank','$2y$10$tRH/4xOak.40lZOMQwf1c.getDmhj5cgQvxeqvJxbltI1enXIxp/O','2018-04-11 22:40:24','Kyle','Swank',3,'I2R','111111','e20051289412024614907ab4',1),(35,'bkanani','$2y$10$R52bHnb/wp/fo5XoAj8GxuH0V4XZklldB2MoBQ5a7NJKS7XSV6/c.','2018-04-11 22:42:55','Bredan','Kanani',3,'I2R','111111','e20051289412011614807cbb',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-04-12  1:36:34

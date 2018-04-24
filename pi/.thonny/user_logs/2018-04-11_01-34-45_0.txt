@@ -1,0 +1,118 @@
+[
+    {
+        "text_widget_id": 1970575600,
+        "editor_class": "Editor",
+        "time": "2018-04-11T01:34:45.831791",
+        "text_widget_class": "CodeViewText",
+        "editor_id": 1970491056,
+        "sequence": "EditorTextCreated"
+    },
+    {
+        "filename": "/home/pi/Desktop/serialread.py",
+        "text_widget_id": 1970575600,
+        "editor_class": "Editor",
+        "time": "2018-04-11T01:34:45.833006",
+        "text_widget_class": "CodeViewText",
+        "editor_id": 1970491056,
+        "sequence": "Open"
+    },
+    {
+        "text_widget_id": 1970575600,
+        "index1": "1.0",
+        "index2": "2.0",
+        "time": "2018-04-11T01:34:45.913373",
+        "text_widget_class": "CodeViewText",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_id": 1970575600,
+        "text": "import time\nimport serial\nimport binascii\n\nabort_after = 15\ncount = 0\n\nrfid_serial = serial.Serial(\n        port='/dev/ttyAMA0',\n        baudrate = 57600,\n        parity=serial.PARITY_NONE,\n        stopbits=serial.STOPBITS_ONE,\n        bytesize=serial.EIGHTBITS,\n        timeout=0\n)\n\nangle = input(\"Angle of tag being scanned: \")\nrfid_serial.flushInput()\nstart = time.time()\nwhile True:\n        delta_time = time.time() - start\n        if (delta_time >= abort_after):\n                break\n        bytesToRead = rfid_serial.inWaiting()\n        if (bytesToRead > 0):\n                x = rfid_serial.read(18)\n                x = binascii.hexlify(x)\n                print x\n                #print(\"\\n\")\n                if (x[0:4] == '1100'):\n                        count = count + 1\n\nfrequency = count / float(abort_after)\nwith open(\"results.txt\", \"a\") as myfile:\n        myfile.write(\"Number of scans at %s  degrees in %s seconds: %s scans \\n\" % (angle, abort_after, count))\n        myfile.write(\"Frequency: %s \\n\" % (frequency))\nwith open(\"csvResults.txt\", \"a\") as myfile:\n        myfile.write(\"%s,%s,%s,%s \\n\" % (angle, abort_after, count,frequency)) #creates csv of (test angle, time scanned, count, frequency)\nprint(\"Finished!\")\nprint \"Number of scans at\",angle,\"degrees in\",abort_after,\"seconds:\",count,\"scans\"\nprint \"Number of scans per second:\",frequency\n",
+        "index": "1.0",
+        "tags": "()",
+        "time": "2018-04-11T01:34:45.932818",
+        "text_widget_class": "CodeViewText",
+        "sequence": "TextInsert"
+    },
+    {
+        "view_class": "ShellView",
+        "view_id": "ShellView",
+        "sequence": "ShowView",
+        "time": "2018-04-11T01:34:45.949794"
+    },
+    {
+        "time": "2018-04-11T01:34:46.287297",
+        "sequence": "<FocusIn>",
+        "widget_class": "Workbench",
+        "widget_id": 1982871984
+    },
+    {
+        "text_widget_id": 1970430960,
+        "text": "Python 3.5.3 (/usr/bin/python3)",
+        "index": "1.0",
+        "tags": "('welcome',)",
+        "text_widget_context": "shell",
+        "time": "2018-04-11T01:34:46.303752",
+        "text_widget_class": "ShellText",
+        "sequence": "TextInsert"
+    },
+    {
+        "text_widget_id": 1970430960,
+        "text": "\n",
+        "index": "1.31",
+        "tags": "('io',)",
+        "text_widget_context": "shell",
+        "time": "2018-04-11T01:34:46.307923",
+        "text_widget_class": "ShellText",
+        "sequence": "TextInsert"
+    },
+    {
+        "text_widget_id": 1970430960,
+        "text": ">>> ",
+        "index": "2.0",
+        "tags": "('toplevel', 'prompt')",
+        "text_widget_context": "shell",
+        "time": "2018-04-11T01:34:46.309863",
+        "text_widget_class": "ShellText",
+        "sequence": "TextInsert"
+    },
+    {
+        "text_widget_id": 1970575600,
+        "widget_class": "CodeViewText",
+        "time": "2018-04-11T01:34:48.114349",
+        "text_widget_class": "CodeViewText",
+        "sequence": "<Button-1>",
+        "widget_id": 1970575600
+    },
+    {
+        "text_widget_id": 1970575600,
+        "index1": "9.22",
+        "index2": "9.25",
+        "time": "2018-04-11T01:34:49.600601",
+        "text_widget_class": "CodeViewText",
+        "sequence": "TextDelete"
+    },
+    {
+        "text_widget_id": 1970575600,
+        "text": "S",
+        "index": "9.22",
+        "tags": "None",
+        "time": "2018-04-11T01:34:49.608209",
+        "text_widget_class": "CodeViewText",
+        "sequence": "TextInsert"
+    },
+    {
+        "time": "2018-04-11T01:34:51.296289",
+        "sequence": "<Button-1>",
+        "widget_class": "Button",
+        "widget_id": 1970400752
+    },
+    {
+        "filename": "/home/pi/Desktop/serialread.py",
+        "text_widget_id": 1970575600,
+        "editor_class": "Editor",
+        "time": "2018-04-11T01:34:51.378110",
+        "text_widget_class": "CodeViewText",
+        "editor_id": 1970491056,
+        "sequence": "Save"
+    }
+]

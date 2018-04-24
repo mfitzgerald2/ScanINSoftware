@@ -1,0 +1,4 @@
+AuthName "SRTS Oakland Login"
+AuthType Basic
+AuthUserFile /var/www/.htpasswd
+require valid-user

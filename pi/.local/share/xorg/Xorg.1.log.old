@@ -1,0 +1,213 @@
+[   109.286] 
+X.Org X Server 1.19.2
+Release Date: 2017-03-02
+[   109.288] X Protocol Version 11, Revision 0
+[   109.289] Build Operating System: Linux 4.9.41-v7+ armv7l Raspbian
+[   109.292] Current Operating System: Linux raspberrypi 4.14.30-v7+ #1102 SMP Mon Mar 26 16:45:49 BST 2018 armv7l
+[   109.292] Kernel command line: 8250.nr_uarts=1 bcm2708_fb.fbwidth=800 bcm2708_fb.fbheight=480 bcm2708_fb.fbswap=1 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=tty1 root=PARTUUID=b0333000-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles
+[   109.302] Build Date: 18 October 2017  04:55:30PM
+[   109.305] xorg-server 2:1.19.2-1+rpt1+deb9u2 (https://www.debian.org/support) 
+[   109.307] Current version of pixman: 0.34.0
+[   109.313] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[   109.313] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[   109.326] (==) Log file: "/home/pi/.local/share/xorg/Xorg.1.log", Time: Thu Apr 12 01:10:47 2018
+[   109.330] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[   109.331] (==) No Layout section.  Using the first Screen section.
+[   109.331] (==) No screen section available. Using defaults.
+[   109.331] (**) |-->Screen "Default Screen Section" (0)
+[   109.331] (**) |   |-->Monitor "<default monitor>"
+[   109.332] (==) No device specified for screen "Default Screen Section".
+	Using the first device section listed.
+[   109.332] (**) |   |-->Device "Allwinner A10/A13 FBDEV"
+[   109.332] (==) No monitor specified for screen "Default Screen Section".
+	Using a default monitor configuration.
+[   109.332] (==) Automatically adding devices
+[   109.332] (==) Automatically enabling devices
+[   109.332] (==) Automatically adding GPU devices
+[   109.332] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[   109.332] (WW) The directory "/usr/share/fonts/X11/misc" does not exist.
+[   109.332] 	Entry deleted from font path.
+[   109.332] (WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+[   109.332] 	Entry deleted from font path.
+[   109.333] (WW) The directory "/usr/share/fonts/X11/75dpi/" does not exist.
+[   109.333] 	Entry deleted from font path.
+[   109.333] (WW) The directory "/usr/share/fonts/X11/75dpi" does not exist.
+[   109.333] 	Entry deleted from font path.
+[   109.333] (==) FontPath set to:
+	/usr/share/fonts/X11/100dpi/:unscaled,
+	/usr/share/fonts/X11/Type1,
+	/usr/share/fonts/X11/100dpi,
+	built-ins
+[   109.333] (==) ModulePath set to "/usr/lib/xorg/modules"
+[   109.333] (II) The server relies on udev to provide the list of input devices.
+	If no devices become available, reconfigure udev or disable AutoAddDevices.
+[   109.333] (II) Loader magic: 0x1fbf40
+[   109.333] (II) Module ABI versions:
+[   109.333] 	X.Org ANSI C Emulation: 0.4
+[   109.333] 	X.Org Video Driver: 23.0
+[   109.333] 	X.Org XInput driver : 24.1
+[   109.333] 	X.Org Server Extension : 10.0
+[   109.336] (++) using VT number 3
+
+[   109.341] (II) systemd-logind: took control of session /org/freedesktop/login1/session/c3
+[   109.341] (II) no primary bus or device found
+[   109.341] (II) LoadModule: "glx"
+[   109.342] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[   109.346] (II) Module glx: vendor="X.Org Foundation"
+[   109.346] 	compiled for 1.19.2, module version = 1.0.0
+[   109.346] 	ABI class: X.Org Server Extension, version 10.0
+[   109.346] (II) LoadModule: "fbturbo"
+[   109.347] (II) Loading /usr/lib/xorg/modules/drivers/fbturbo_drv.so
+[   109.347] (II) Module fbturbo: vendor="X.Org Foundation"
+[   109.347] 	compiled for 1.19.2, module version = 0.5.1
+[   109.347] 	Module class: X.Org Video Driver
+[   109.347] 	ABI class: X.Org Video Driver, version 23.0
+[   109.347] (II) FBTURBO: driver for framebuffer: fbturbo
+[   109.347] (WW) Falling back to old probe method for fbturbo
+[   109.347] (II) Loading sub module "fbdevhw"
+[   109.347] (II) LoadModule: "fbdevhw"
+[   109.348] (II) Loading /usr/lib/xorg/modules/libfbdevhw.so
+[   109.348] (II) Module fbdevhw: vendor="X.Org Foundation"
+[   109.348] 	compiled for 1.19.2, module version = 0.0.2
+[   109.348] 	ABI class: X.Org Video Driver, version 23.0
+[   109.348] (II) FBTURBO(0): using /dev/fb0
+[   109.348] (WW) VGA arbiter: cannot open kernel arbiter, no multi-card support
+[   109.348] (II) FBTURBO(0): Creating default Display subsection in Screen section
+	"Default Screen Section" for depth/fbbpp 24/32
+[   109.348] (==) FBTURBO(0): Depth 24, (==) framebuffer bpp 32
+[   109.348] (==) FBTURBO(0): RGB weight 888
+[   109.348] (==) FBTURBO(0): Default visual is TrueColor
+[   109.348] (==) FBTURBO(0): Using gamma correction (1.0, 1.0, 1.0)
+[   109.348] (II) FBTURBO(0): hardware: BCM2708 FB (video memory: 1500kB)
+[   109.348] (**) FBTURBO(0): Option "fbdev" "/dev/fb0"
+[   109.348] (**) FBTURBO(0): Option "SwapbuffersWait" "true"
+[   109.349] (II) FBTURBO(0): processor: Unknown
+[   109.349] (II) FBTURBO(0): checking modes against framebuffer device...
+[   109.349] (II) FBTURBO(0): checking modes against monitor...
+[   109.349] (--) FBTURBO(0): Virtual size is 800x480 (pitch 800)
+[   109.349] (**) FBTURBO(0):  Built-in mode "current"
+[   109.349] (==) FBTURBO(0): DPI set to (96, 96)
+[   109.349] (II) Loading sub module "fb"
+[   109.349] (II) LoadModule: "fb"
+[   109.349] (II) Loading /usr/lib/xorg/modules/libfb.so
+[   109.350] (II) Module fb: vendor="X.Org Foundation"
+[   109.350] 	compiled for 1.19.2, module version = 1.0.0
+[   109.350] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[   109.350] (==) Depth 24 pixmap format is 32 bpp
+[   109.351] (II) FBTURBO(0): using backing store heuristics
+[   109.353] (WW) LoadKernelModule: Setting of real/effective user Id to 0/0 failed[   109.357] (II) FBTURBO(0): can't load 'g2d_23' kernel module
+[   109.357] (II) FBTURBO(0): failed to enable the use of sunxi display controller
+[   109.357] (II) FBTURBO(0): No sunxi-g2d hardware detected (check /dev/disp and /dev/g2d)
+[   109.357] (II) FBTURBO(0): G2D hardware acceleration can't be enabled
+[   109.357] (II) FBTURBO(0): enabled fbdev copyarea acceleration
+[   109.357] (==) FBTURBO(0): Backing store enabled
+[   109.358] (==) FBTURBO(0): DPMS enabled
+[   109.358] (II) FBTURBO(0): failed to enable hardware cursor
+[   109.358] (II) FBTURBO(0): no 3D acceleration because the driver has been compiled without libUMP
+[   109.358] (II) FBTURBO(0): if this is wrong and needs to be fixed, please check ./configure log
+[   109.358] (==) RandR enabled
+[   109.380] (II) SELinux: Disabled on system
+[   109.383] (II) AIGLX: Screen 0 is not DRI2 capable
+[   109.383] (EE) AIGLX: reverting to software rendering
+[   109.484] (II) IGLX: enabled GLX_MESA_copy_sub_buffer
+[   109.486] (II) IGLX: Loaded and initialized swrast
+[   109.486] (II) GLX: Initialized DRISWRAST GL provider for screen 0
+[   109.625] (II) config/udev: Adding input device PixArt Microsoft USB Optical Mouse (/dev/input/event0)
+[   109.625] (**) PixArt Microsoft USB Optical Mouse: Applying InputClass "libinput pointer catchall"
+[   109.625] (II) LoadModule: "libinput"
+[   109.625] (II) Loading /usr/lib/xorg/modules/input/libinput_drv.so
+[   109.631] (II) Module libinput: vendor="X.Org Foundation"
+[   109.631] 	compiled for 1.19.0, module version = 0.23.0
+[   109.631] 	Module class: X.Org XInput Driver
+[   109.631] 	ABI class: X.Org XInput driver, version 24.1
+[   109.631] (II) Using input driver 'libinput' for 'PixArt Microsoft USB Optical Mouse'
+[   109.633] (II) systemd-logind: got fd for /dev/input/event0 13:64 fd 19 paused 0
+[   109.633] (**) PixArt Microsoft USB Optical Mouse: always reports core events
+[   109.633] (**) Option "Device" "/dev/input/event0"
+[   109.634] (**) Option "_source" "server/udev"
+[   109.636] (II) input device 'PixArt Microsoft USB Optical Mouse', /dev/input/event0 is tagged by udev as: Mouse
+[   109.636] (II) input device 'PixArt Microsoft USB Optical Mouse', /dev/input/event0 is a pointer caps
+[   109.636] (**) Option "config_info" "udev:/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.4/1-1.4:1.0/0003:045E:00CB.0001/input/input0/event0"
+[   109.636] (II) XINPUT: Adding extended input device "PixArt Microsoft USB Optical Mouse" (type: MOUSE, id 6)
+[   109.637] (**) Option "AccelerationScheme" "none"
+[   109.637] (**) PixArt Microsoft USB Optical Mouse: (accel) selected scheme none/0
+[   109.637] (**) PixArt Microsoft USB Optical Mouse: (accel) acceleration factor: 2.000
+[   109.637] (**) PixArt Microsoft USB Optical Mouse: (accel) acceleration threshold: 4
+[   109.639] (II) input device 'PixArt Microsoft USB Optical Mouse', /dev/input/event0 is tagged by udev as: Mouse
+[   109.639] (II) input device 'PixArt Microsoft USB Optical Mouse', /dev/input/event0 is a pointer caps
+[   109.641] (II) config/udev: Adding input device PixArt Microsoft USB Optical Mouse (/dev/input/mouse0)
+[   109.641] (II) No input driver specified, ignoring this device.
+[   109.642] (II) This device may have been added with another device file.
+[   109.644] (II) config/udev: Adding input device CHICONY HP Basic USB Keyboard (/dev/input/event1)
+[   109.644] (**) CHICONY HP Basic USB Keyboard: Applying InputClass "libinput keyboard catchall"
+[   109.644] (II) Using input driver 'libinput' for 'CHICONY HP Basic USB Keyboard'
+[   109.646] (II) systemd-logind: got fd for /dev/input/event1 13:65 fd 22 paused 0
+[   109.646] (**) CHICONY HP Basic USB Keyboard: always reports core events
+[   109.646] (**) Option "Device" "/dev/input/event1"
+[   109.647] (**) Option "_source" "server/udev"
+[   109.648] (II) input device 'CHICONY HP Basic USB Keyboard', /dev/input/event1 is tagged by udev as: Keyboard
+[   109.649] (II) input device 'CHICONY HP Basic USB Keyboard', /dev/input/event1 is a keyboard
+[   109.649] (**) Option "config_info" "udev:/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/0003:03F0:0024.0002/input/input1/event1"
+[   109.649] (II) XINPUT: Adding extended input device "CHICONY HP Basic USB Keyboard" (type: KEYBOARD, id 7)
+[   109.649] (**) Option "xkb_model" "pc105"
+[   109.649] (**) Option "xkb_layout" "gb"
+[   109.719] (II) input device 'CHICONY HP Basic USB Keyboard', /dev/input/event1 is tagged by udev as: Keyboard
+[   109.719] (II) input device 'CHICONY HP Basic USB Keyboard', /dev/input/event1 is a keyboard
+[   109.720] (II) config/udev: Adding input device FT5406 memory based driver (/dev/input/event2)
+[   109.721] (**) FT5406 memory based driver: Applying InputClass "libinput touchscreen catchall"
+[   109.721] (II) Using input driver 'libinput' for 'FT5406 memory based driver'
+[   109.722] (II) systemd-logind: got fd for /dev/input/event2 13:66 fd 23 paused 0
+[   109.723] (**) FT5406 memory based driver: always reports core events
+[   109.723] (**) Option "Device" "/dev/input/event2"
+[   109.723] (**) Option "_source" "server/udev"
+[   109.724] (II) input device 'FT5406 memory based driver', /dev/input/event2 is tagged by udev as: Touchscreen
+[   109.724] (II) input device 'FT5406 memory based driver', /dev/input/event2 is a touch device
+[   109.724] (**) Option "config_info" "udev:/sys/devices/virtual/input/input2/event2"
+[   109.724] (II) XINPUT: Adding extended input device "FT5406 memory based driver" (type: TOUCHSCREEN, id 8)
+[   109.724] (**) Option "AccelerationScheme" "none"
+[   109.725] (**) FT5406 memory based driver: (accel) selected scheme none/0
+[   109.725] (**) FT5406 memory based driver: (accel) acceleration factor: 2.000
+[   109.725] (**) FT5406 memory based driver: (accel) acceleration threshold: 4
+[   109.726] (II) input device 'FT5406 memory based driver', /dev/input/event2 is tagged by udev as: Touchscreen
+[   109.726] (II) input device 'FT5406 memory based driver', /dev/input/event2 is a touch device
+[   109.727] (II) config/udev: Adding input device FT5406 memory based driver (/dev/input/mouse1)
+[   109.727] (II) No input driver specified, ignoring this device.
+[   109.727] (II) This device may have been added with another device file.
+[   124.310] (**) Option "fd" "19"
+[   124.311] (**) Option "fd" "22"
+[   124.312] (**) Option "fd" "23"
+[   124.322] (II) systemd-logind: got pause for 13:66
+[   124.322] (II) systemd-logind: got pause for 13:64
+[   124.322] (II) systemd-logind: got pause for 13:65
+[   173.340] (II) systemd-logind: got resume for 13:66
+[   173.346] (II) input device 'FT5406 memory based driver', /dev/input/event2 is tagged by udev as: Touchscreen
+[   173.346] (II) input device 'FT5406 memory based driver', /dev/input/event2 is a touch device
+[   173.390] (II) systemd-logind: got resume for 13:64
+[   173.394] (II) input device 'PixArt Microsoft USB Optical Mouse', /dev/input/event0 is tagged by udev as: Mouse
+[   173.394] (II) input device 'PixArt Microsoft USB Optical Mouse', /dev/input/event0 is a pointer caps
+[   173.431] (II) systemd-logind: got resume for 13:65
+[   173.435] (II) input device 'CHICONY HP Basic USB Keyboard', /dev/input/event1 is tagged by udev as: Keyboard
+[   173.435] (II) input device 'CHICONY HP Basic USB Keyboard', /dev/input/event1 is a keyboard
+[   175.209] (**) Option "fd" "23"
+[   175.210] (**) Option "fd" "25"
+[   175.211] (**) Option "fd" "22"
+[   175.219] (II) systemd-logind: got pause for 13:66
+[   175.219] (II) systemd-logind: got pause for 13:64
+[   175.219] (II) systemd-logind: got pause for 13:65
+[   186.465] (II) UnloadModule: "libinput"
+[   186.465] (II) systemd-logind: releasing fd for 13:66
+[   186.523] (EE) systemd-logind: failed to release device: Connection was disconnected before a reply was received
+[   186.524] (II) UnloadModule: "libinput"
+[   186.524] (II) systemd-logind: releasing fd for 13:65
+[   186.524] (EE) systemd-logind: failed to release device: Connection is closed
+[   186.525] (II) UnloadModule: "libinput"
+[   186.525] (II) systemd-logind: releasing fd for 13:64
+[   186.525] (EE) systemd-logind: failed to release device: Connection is closed
+[   186.545] (WW) xf86CloseConsole: KDSETMODE failed: Input/output error
+[   186.545] (WW) xf86CloseConsole: VT_GETMODE failed: Input/output error
+[   186.545] (WW) xf86CloseConsole: VT_ACTIVATE failed: Input/output error
+[   186.545] (EE) systemd-logind: ReleaseControl failed: Connection is closed
+[   186.545] (II) Server terminated successfully (0). Closing log file.

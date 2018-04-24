@@ -1,0 +1,58 @@
+[03-Apr-2018 03:25:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code:15
+Stack trace:
+#0 /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48): eval()
+#1 /home/srts/public_html/wp-includes/class-wp-hook.php(286): will_bontrager_insert_php('[insert_php]\r\n$...')
+#2 /home/srts/public_html/wp-includes/plugin.php(203): WP_Hook->apply_filters('[insert_php]\r\n$...', Array)
+#3 /home/srts/public_html/wp-includes/post-template.php(240): apply_filters('the_content', '[insert_php]\r\n$...')
+#4 /home/srts/public_html/wp-content/themes/spacious/content-page.php(14): the_content()
+#5 /home/srts/public_html/wp-includes/template.php(690): require('/home/srts/publ...')
+#6 /home/srts/public_html/wp-includes/template.php(647): load_template('/home/srts/publ...', false)
+#7 /home/srts/public_html/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#8 /home/srts/public_html/wp-content/themes/spacious/page.php(1 in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 15
+[03-Apr-2018 03:25:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code:15
+Stack trace:
+#0 /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48): eval()
+#1 /home/srts/public_html/wp-includes/class-wp-hook.php(286): will_bontrager_insert_php('[insert_php]\r\n$...')
+#2 /home/srts/public_html/wp-includes/plugin.php(203): WP_Hook->apply_filters('[insert_php]\r\n$...', Array)
+#3 /home/srts/public_html/wp-includes/post-template.php(240): apply_filters('the_content', '[insert_php]\r\n$...')
+#4 /home/srts/public_html/wp-content/themes/spacious/content-page.php(14): the_content()
+#5 /home/srts/public_html/wp-includes/template.php(690): require('/home/srts/publ...')
+#6 /home/srts/public_html/wp-includes/template.php(647): load_template('/home/srts/publ...', false)
+#7 /home/srts/public_html/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#8 /home/srts/public_html/wp-content/themes/spacious/page.php(1 in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 15
+[03-Apr-2018 03:25:56 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:26:03 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:26:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code:15
+Stack trace:
+#0 /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48): eval()
+#1 /home/srts/public_html/wp-includes/class-wp-hook.php(286): will_bontrager_insert_php('[insert_php]\r\n$...')
+#2 /home/srts/public_html/wp-includes/plugin.php(203): WP_Hook->apply_filters('[insert_php]\r\n$...', Array)
+#3 /home/srts/public_html/wp-includes/post-template.php(240): apply_filters('the_content', '[insert_php]\r\n$...')
+#4 /home/srts/public_html/wp-content/themes/spacious/content-page.php(14): the_content()
+#5 /home/srts/public_html/wp-includes/template.php(690): require('/home/srts/publ...')
+#6 /home/srts/public_html/wp-includes/template.php(647): load_template('/home/srts/publ...', false)
+#7 /home/srts/public_html/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#8 /home/srts/public_html/wp-content/themes/spacious/page.php(1 in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 15
+[03-Apr-2018 03:27:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code:15
+Stack trace:
+#0 /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48): eval()
+#1 /home/srts/public_html/wp-includes/class-wp-hook.php(286): will_bontrager_insert_php('[insert_php]\r\n$...')
+#2 /home/srts/public_html/wp-includes/plugin.php(203): WP_Hook->apply_filters('[insert_php]\r\n$...', Array)
+#3 /home/srts/public_html/wp-includes/post-template.php(240): apply_filters('the_content', '[insert_php]\r\n$...')
+#4 /home/srts/public_html/wp-content/themes/spacious/content-page.php(14): the_content()
+#5 /home/srts/public_html/wp-includes/template.php(690): require('/home/srts/publ...')
+#6 /home/srts/public_html/wp-includes/template.php(647): load_template('/home/srts/publ...', false)
+#7 /home/srts/public_html/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#8 /home/srts/public_html/wp-content/themes/spacious/page.php(1 in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 15
+[03-Apr-2018 03:28:29 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:28:32 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 2
+[03-Apr-2018 03:29:13 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:29:23 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:29:28 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:29:31 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:31:37 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 44
+[03-Apr-2018 03:35:51 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 2
+[03-Apr-2018 03:36:09 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 2
+[03-Apr-2018 03:40:24 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/srts/public_html/wp-content/plugins/insert-php/insert_php.php(48) : eval()'d code on line 2
+[03-Apr-2018 03:40:41 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/srts/public_html/wp-content/themes/spacious/header.php:11) in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 2
+[03-Apr-2018 03:40:41 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/srts/public_html/wp-content/themes/spacious/header.php:11) in /home/srts/public_html/wp-content/plugins/insert-php-code-snippet/shortcode-handler.php(65) : eval()'d code on line 11

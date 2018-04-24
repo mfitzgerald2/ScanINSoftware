@@ -1,0 +1,2 @@
+
+[06-Mar-2018 14:52:28 UTC] WordPress database error Table 'srts_system.wpgf_signups' doesn't exist for query SHOW FULL COLUMNS FROM `wpgf_signups` made by wp_delete_user, do_action('delete_user'), WP_Hook->do_action, WP_Hook->apply_filters, wppb_delete_user_from_signups
